@@ -1,3 +1,14 @@
 allprojects {
     apply plugin: 'base'
 }
+
+evaluationDependsOnChildren()
+
+subprojects {
+	task compileRevealJS(type: Exec) {
+		dependsOn processPrompts
+		commandLine 'pandoc', 'prompts.md', '-t', 'revealjs', '-o', 'slides.html'
+		workingDir buildDir
+	}
+}
+

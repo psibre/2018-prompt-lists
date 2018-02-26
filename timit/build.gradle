@@ -16,12 +16,23 @@ dependencies {
 }
 
 task processPrompts(type: Copy) {
+
     from configurations.data
     into buildDir
+    def outputFile = file("$buildDir/prompts.md")
     eachFile { fileDetails ->
-        fileDetails.file.eachLine { line ->
-            println line
-        }
+    	outputFile.withWriter { writer ->
+    		fileDetails.file.eachLine { line ->
+    			if (line.startsWith(';'))
+    			    return
+    			(line =~ /(.+) \((.+)\)/).each { all, prompt, code ->
+    			    writer.println "## $prompt"
+    			    writer.println()
+    			    writer.println code
+    			    writer.println()
+    			}        	
+    		}
+    	}     	
         fileDetails.exclude()
     }
 }
