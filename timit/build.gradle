@@ -1,0 +1,16 @@
+repositories {
+    ivy {
+        url 'https://catalog.ldc.upenn.edu/docs'
+        layout 'pattern', {
+            artifact 'LDC93S1/[module].[ext]'
+        }
+    }
+}
+
+configurations {
+    data
+}
+
+dependencies {
+    data group: 'edu.upenn.ldc.timit', name: 'PROMPTS', version: '1988-10-31', ext: 'TXT'
+}

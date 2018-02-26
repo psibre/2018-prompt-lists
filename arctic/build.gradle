@@ -1,0 +1,16 @@
+repositories {
+    ivy {
+        url 'http://festvox.org/cmu_arctic'
+        layout 'pattern', {
+            artifact '[module].[ext]'
+        }
+    }
+}
+
+configurations {
+    data
+}
+
+dependencies {
+    data group: 'org.festvox', name: 'cmuarctic', version: '0.95', ext: 'data'
+}
