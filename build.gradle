@@ -5,15 +5,21 @@ allprojects {
 evaluationDependsOnChildren()
 
 subprojects {
+    task copyBeep(type: Copy) {
+        from "$rootDir/src"
+        into buildDir
+        include 'beep.mp3'
+    }
+
     task compileRevealJsPrompts(type: Exec) {
-        dependsOn processPrompts
+        dependsOn processPrompts, copyBeep
         commandLine 'pandoc', 'prompts.md', '-t', 'revealjs', '-s', '--self-contained', '-o', 'prompts.html'
         workingDir buildDir
         outputs.file "$buildDir/prompts.html"
     }
 
     task compileBeamerPrompts(type: Exec) {
-        dependsOn processPrompts
+        dependsOn processPrompts, copyBeep
         commandLine 'pandoc', 'prompts.md', '-t', 'beamer', '-s', '--self-contained', '-o', 'prompts.pdf'
         workingDir buildDir
         outputs.file "$buildDir/prompts.pdf"
