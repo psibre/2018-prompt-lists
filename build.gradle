@@ -1,12 +1,3 @@
 allprojects {
     apply plugin: 'base'
 }
-
-evaluationDependsOnChildren()
-
-subprojects {
-    task unpackData(type: Copy) {
-        from configurations.data
-        into buildDir
-    }
-}

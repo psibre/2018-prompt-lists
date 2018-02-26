@@ -14,3 +14,14 @@ configurations {
 dependencies {
     data group: 'org.festvox', name: 'cmuarctic', version: '0.95', ext: 'data'
 }
+
+task processPrompts(type: Copy) {
+    from configurations.data
+    into buildDir
+    eachFile { fileDetails ->
+        fileDetails.file.eachLine { line ->
+            println line
+        }
+        fileDetails.exclude()
+    }
+}

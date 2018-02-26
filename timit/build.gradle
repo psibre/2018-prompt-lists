@@ -14,3 +14,14 @@ configurations {
 dependencies {
     data group: 'edu.upenn.ldc.timit', name: 'PROMPTS', version: '1988-10-31', ext: 'TXT'
 }
+
+task processPrompts(type: Copy) {
+    from configurations.data
+    into buildDir
+    eachFile { fileDetails ->
+        fileDetails.file.eachLine { line ->
+            println line
+        }
+        fileDetails.exclude()
+    }
+}
