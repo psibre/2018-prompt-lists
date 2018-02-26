@@ -22,6 +22,10 @@ task processPrompts(type: Copy) {
     def outputFile = file("$buildDir/prompts.md")
     eachFile { fileDetails ->
     	outputFile.withWriter { writer ->
+    		writer.println "---"
+    		writer.println "revealjs-url: https://revealjs.com"
+    		writer.println "---"
+
     		fileDetails.file.eachLine { line ->
     			if (line.startsWith(';'))
     			    return
