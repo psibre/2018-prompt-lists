@@ -30,6 +30,9 @@ task processPrompts(type: Copy) {
     			    writer.println()
     			    writer.println code
     			    writer.println()
+    			    writer.println "<audio data-autoplay src='beep.mp3'></audio>"
+    			    writer.println()
+
     			}        	
     		}
     	}     	
