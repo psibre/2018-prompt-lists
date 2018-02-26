@@ -1,3 +1,21 @@
 allprojects {
     apply plugin: 'base'
 }
+
+evaluationDependsOnChildren()
+
+subprojects {
+    task compileRevealJsPrompts(type: Exec) {
+        dependsOn processPrompts
+        commandLine 'pandoc', 'prompts.md', '-t', 'revealjs', '-s', '--self-contained', '-o', 'prompts.html'
+        workingDir buildDir
+        outputs.file "$buildDir/prompts.html"
+    }
+
+    task compileBeamerPrompts(type: Exec) {
+        dependsOn processPrompts
+        commandLine 'pandoc', 'prompts.md', '-t', 'beamer', '-s', '--self-contained', '-o', 'prompts.pdf'
+        workingDir buildDir
+        outputs.file "$buildDir/prompts.pdf"
+    }
+}
