@@ -23,6 +23,9 @@ task processPrompts(type: Copy) {
         outputFile.withWriter { writer ->
             writer.println "---"
             writer.println "revealjs-url: https://revealjs.com"
+            writer.println "include-after:"
+            writer.println "  - <audio src='beep.mp3' id='beep'></audio>"
+            writer.println "  - <script>Reveal.addEventListener( 'slidechanged', function( event ) { var beep = document.getElementById('beep'); beep.play(); } );</script>"
             writer.println "..."
             writer.println()
 
@@ -34,9 +37,6 @@ task processPrompts(type: Copy) {
                     writer.println()
                     writer.println code
                     writer.println()
-                    writer.println "<audio data-autoplay src='beep.mp3'></audio>"
-                    writer.println()
-
                 }
             }
         }
