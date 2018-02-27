@@ -16,10 +16,14 @@ dependencies {
 }
 
 task processPrompts(type: ProcessPrompts) {
+    pattern = ~/(?<prompt>.+) \((?<code>.+)\)/
     destFile = file("$buildDir/prompts.md")
 }
 
 class ProcessPrompts extends DefaultTask {
+
+    @Input
+    Property<java.util.regex.Pattern> pattern = project.objects.property(java.util.regex.Pattern)
 
     @OutputFile
     final RegularFileProperty destFile = newOutputFile()
@@ -50,7 +54,7 @@ class ProcessPrompts extends DefaultTask {
                     fileDetails.file.eachLine { line ->
                         if (line.startsWith(';'))
                             return
-                        def matcher = line =~ /(?<prompt>.+) \((?<code>.+)\)/
+                        def matcher = line =~ pattern.get()
                         if (matcher.matches()) {
                             writer.println "## ${matcher.group('prompt')}"
                             writer.println()
