@@ -5,6 +5,7 @@ allprojects {
 evaluationDependsOnChildren()
 
 subprojects {
+
     task copyBeep(type: Copy) {
         from "$rootDir/src"
         into buildDir
