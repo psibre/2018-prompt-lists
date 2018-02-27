@@ -18,4 +18,11 @@ subprojects {
         workingDir buildDir
         outputs.file "$buildDir/prompts.html"
     }
+
+    task compileBeamerPrompts(type: Exec) {
+        dependsOn processPrompts, copyBeep
+        commandLine 'pandoc', 'prompts.md', '-t', 'beamer', '-s', '--self-contained', '-o', 'prompts.pdf'
+        workingDir buildDir
+        outputs.file "$buildDir/prompts.pdf"
+    }
 }
