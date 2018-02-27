@@ -15,18 +15,22 @@ dependencies {
     data group: 'edu.upenn.ldc.timit', name: 'PROMPTS', version: '1988-10-31', ext: 'TXT'
 }
 
-task processPrompts(type: ProcessPrompts)
+task processPrompts(type: ProcessPrompts) {
+    destFile = file("$buildDir/prompts.md")
+}
 
 class ProcessPrompts extends DefaultTask {
+
+    @OutputFile
+    final RegularFileProperty destFile = newOutputFile()
 
     @TaskAction
     void process() {
         project.copy {
             from project.configurations.data
             into project.buildDir
-            def outputFile = project.file("$project.buildDir/prompts.md")
             eachFile { fileDetails ->
-                outputFile.withWriter { writer ->
+                destFile.get().asFile.withWriter { writer ->
                     writer.println "---"
                     writer.println "header-includes: |"
                     writer.println "    \\usepackage{media9}"
