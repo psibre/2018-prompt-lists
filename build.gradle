@@ -14,7 +14,7 @@ subprojects {
 
     task compileRevealJsPrompts(type: Exec) {
         dependsOn processPrompts, copyBeep
-        commandLine 'pandoc', 'prompts.md', '-t', 'revealjs', '-s', '--self-contained', '-o', 'prompts.html'
+        commandLine 'pandoc', 'prompts.md', '-t', 'revealjs', '-s', '--self-contained', '-V', 'theme=simple', '-o', 'prompts.html'
         workingDir buildDir
         outputs.file "$buildDir/prompts.html"
     }

@@ -21,6 +21,7 @@ class ProcessPrompts extends DefaultTask {
             eachFile { fileDetails ->
                 destFile.get().asFile.withWriter { writer ->
                     writer.println "---"
+                    writer.println "title: Prompts"
                     writer.println "header-includes: |"
                     writer.println "    \\usepackage{media9}"
                     writer.println "    \\usepackage{etoolbox}"
@@ -30,6 +31,7 @@ class ProcessPrompts extends DefaultTask {
                     writer.println "      }]{}{APlayer.swf}"
                     writer.println "    }"
                     writer.println "revealjs-url: https://revealjs.com"
+                    writer.println "transition: none"
                     writer.println "include-after:"
                     writer.println "  - <audio src='beep.mp3' id='beep'></audio>"
                     writer.println "  - <script>Reveal.addEventListener( 'slidechanged', function( event ) { var beep = document.getElementById('beep'); beep.play(); } );</script>"
