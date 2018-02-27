@@ -50,10 +50,11 @@ class ProcessPrompts extends DefaultTask {
                     fileDetails.file.eachLine { line ->
                         if (line.startsWith(';'))
                             return
-                        (line =~ /(.+) \((.+)\)/).each { all, prompt, code ->
-                            writer.println "## $prompt"
+                        def matcher = line =~ /(?<prompt>.+) \((?<code>.+)\)/
+                        if (matcher.matches()) {
+                            writer.println "## ${matcher.group('prompt')}"
                             writer.println()
-                            writer.println code
+                            writer.println matcher.group('code')
                             writer.println()
                         }
                     }
