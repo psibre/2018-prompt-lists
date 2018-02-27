@@ -22,6 +22,14 @@ task processPrompts(type: Copy) {
     eachFile { fileDetails ->
         outputFile.withWriter { writer ->
             writer.println "---"
+            writer.println "header-includes: |"
+            writer.println "    \\usepackage{media9}"
+            writer.println "    \\usepackage{etoolbox}"
+            writer.println "    \\appto\\frame{%"
+            writer.println "      \\includemedia[addresource=beep.mp3, width=1pt, height=1pt, activate=pageopen, noplaybutton, attachfiles, flashvars={%"
+            writer.println "        source=beep.mp3&autoPlay=true&hideBar=true"
+            writer.println "      }]{}{APlayer.swf}"
+            writer.println "    }"
             writer.println "revealjs-url: https://revealjs.com"
             writer.println "include-after:"
             writer.println "  - <audio src='beep.mp3' id='beep'></audio>"

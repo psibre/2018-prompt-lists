@@ -21,7 +21,7 @@ subprojects {
 
     task compileBeamerPrompts(type: Exec) {
         dependsOn processPrompts, copyBeep
-        commandLine 'pandoc', 'prompts.md', '-t', 'beamer', '-s', '--self-contained', '-o', 'prompts.pdf'
+        commandLine 'pandoc', 'prompts.md', '-t', 'beamer', '-s', '-o', 'prompts.pdf'
         workingDir buildDir
         outputs.file "$buildDir/prompts.pdf"
     }
